@@ -25,7 +25,7 @@ class FrontEnd extends React.Component {
             description: "",
             tcorp_id: "",
             value: "",
-            // sign_contract: "",
+            sign_contract: null,
             contract_id: "",
             end_contract_date: "",
             billing_configuration_id: '',
@@ -67,11 +67,11 @@ class FrontEnd extends React.Component {
         }
     }
 
-    // handleChangeSignContract = event => {
-    //     if(event.target.value.length <= 10){
-    //         this.setState({ sign_contract: event.target.value });
-    //     }
-    // }
+    handleChangeSignContract = event => {
+        if(event.target.value.length <= 10){
+            this.setState({ sign_contract: event.target.value });
+        }
+    }
 
     handleChangeContractIdName = event => {
         if(event.target.value.length <= 44){
@@ -234,10 +234,10 @@ class FrontEnd extends React.Component {
                             <h4>มูลค่างาน</h4>
                             <NumberFormat className="form-control" onChange={this.handleChangeValue} thousandSeparator={true} />
                         </div>
-                        {/* <div className="form-group">
+                        <div className="form-group">
                             <h4>วันที่เซ็นสัญญา</h4>
                             <input type="date" className="form-control" onChange={this.handleChangeSignContract} />
-                        </div> */}
+                        </div>
                         <div className="form-group">
                             <h4>สัญญาเลขที่</h4>
                             <input type="text" className="form-control" onChange={this.handleChangeContractIdName} placeholder="XXXXXX" />
