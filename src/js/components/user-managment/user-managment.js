@@ -64,6 +64,7 @@ class componentUserManagement extends React.Component {
                     <tr>
                         <th></th>
                         <th>Name</th>
+                        <th>Username</th>
                         <th>Role</th>
                         <th>Create At</th>
                         <th>Last login</th>
@@ -80,6 +81,9 @@ class componentUserManagement extends React.Component {
                             </td>
                             <td>
                                 {this.nameUpperLower(allUser.firstname)} {this.nameUpperLower(allUser.lastname)}
+                            </td>
+                            <td>
+                                {allUser.username}
                             </td>
                             <td>{allUser.name}</td>
                             <td>01 Oct 2019 13.00</td>

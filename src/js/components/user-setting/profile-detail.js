@@ -100,6 +100,7 @@ class ProfileDetails extends React.Component {
                             <div className="row">
                                 <div className="col-12">
                                     <h2> {this.nameUpperLower(user_info.firstname)} {this.nameUpperLower(user_info.lastname)} </h2>
+                                    <h4> Username: {user_info.username} </h4>
                                     <h4 className="line_under_Projects">ตำแหน่งงาน: {user_info.name} </h4>
                                     <h3>รายละเอียดเพิ่มเติม</h3>
                                     <h5>Email: {user_info.email} </h5>
