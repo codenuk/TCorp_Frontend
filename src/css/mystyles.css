@@ -1,0 +1,457 @@
+.line_under_Projects {
+    border-bottom: 3px solid rgb(240, 240, 240);
+}
+
+.text-underline{
+    text-decoration: underline;
+}
+
+.Projects {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 45px;
+    font-family: ThaiSansLite;
+    /* font-size: 36px; */
+    color: #0c234a;
+}
+
+.T-Corporation-CoLt {
+    margin: 0;
+    padding: 0;
+    width: 211px;
+    height: 34px;
+    font-family: ThaiSansLite;
+    /* font-size: 30px; */
+    color: #7a869a;
+}
+
+.Filter {
+    width: 37px;
+    height: 26px;
+    font-family: ThaiSansLite;
+    margin-left: 2px;
+    margin-right: 10px;
+    font-size: 21px;
+    color: #0c234a;
+}
+
+
+.Rectangle {
+    z-index: -1;
+    width: 100%;
+    margin-top: 15px;
+    padding-top: 30px;
+    background-color: #f7f7f7;
+}
+
+
+.col-centered{
+    margin: 0 auto;
+}
+
+.Rectangle-white {
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    margin-top: 15px;
+    padding-top: 30px;
+    background-color: #fff;
+}
+
+.small-card {
+    margin-top: -10px;
+    margin-left: 180px;
+    width: 95px;
+    height: 61.8px;
+    position: absolute;
+}
+
+.Percent {
+    text-align: center;
+    font-family: Helvetica;
+    color: #ffffff;
+    font-size: 22.8px;
+    margin-top: 10px;
+    margin-bottom: 0;
+}
+
+.Progress {
+    margin-top: 0;
+    text-align: center;
+    font-family: Helvetica;
+    color: #ffffff;
+    font-size: 11.4px;
+}
+
+.Card-setting{
+    margin-top: -5px;
+    margin-left: 15px;
+    margin-bottom: 0;
+    font-family: ThaiSansLite;
+    font-size: 22.8px;
+    color: #0c234a;
+}
+
+.Card-sign {
+    margin-top: 15px;
+    margin-left: 15px;
+    margin-bottom: 0;
+    font-family: ThaiSansLite;
+    font-size: 15.2px;
+    color: #0072bd;
+    display: inline;
+}
+
+.Card-id{
+    font-size: 15.2px;
+    color: #7a869a;
+}
+
+.Class-info{
+    font-family: ThaiSansLite;
+    font-size: 13.3px;
+    color: #7a869a;
+    margin: 0;
+    margin-top: 8px; 
+    margin-left: 15px;  
+    margin-right: 0; 
+}
+
+.Class-info-status{
+    font-family: ThaiSansLite;
+    font-size: 17.1px;
+    margin: 0;
+    margin-top: -3px;
+    margin-left: 15px;
+    margin-bottom: -8px;  
+}
+
+.Class-info-identity{
+    font-family: ThaiSansLite;
+    font-size: 13.3px;
+    margin: 0;
+    margin-top: 15px; 
+    color: #0072bd;
+}
+
+#Layout-info{
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+.Topic {
+    margin-top: 15px;
+    margin-left: 20px;
+    margin-bottom: 18px;
+    width: 525px;
+    height: 44px;
+    font-family: ThaiSansLite;
+    font-size: 40px;
+    color: #373a3c;
+}
+
+p.Detail {
+    margin-left: 20px;
+    margin-bottom: 15px;
+    height: 26px;
+    font-family: ThaiSansLite;
+    font-size: 26px;
+    color: #373a3c;
+}
+  
+.line_under_Detail {
+    padding-bottom: 90px;
+    border-bottom: 3px solid rgb(240, 240, 240);
+}
+
+.line_under_Detail2 {
+    padding-bottom: 30px;
+    border-bottom: 3px solid rgb(240, 240, 240);
+}
+
+#add{
+    margin-top: 15px;
+    margin-left: 20px;
+    width: 110px;
+    height: 38px;
+    border-radius: 4px;
+    border: solid 1px #cccccc;
+    background-color: #ffffff;
+    font-family: ThaiSansLite;
+    font-size: 20px;
+    text-align: center;
+    color: #373a3c;
+}
+
+#add2{
+    width: 94px;
+    height: 38px;
+    border-radius: 4px;
+    border: solid 1px #5cb85c;
+    background-color: #5cb85c;
+    margin-top: 15px;
+    margin-left: 20px;
+    font-family: ThaiSansLite;
+    font-size: 20px;
+    text-align: center;
+    color: #ffffff;
+}
+
+#add3{
+    width: 540px;
+    height: 38px;
+    margin-top: 15px;
+    border-radius: 4px;
+    border: solid 1px #5bc0de;
+    background-color: #5bc0de;
+    border-radius: 4px;
+    font-family: ThaiSansLite;
+    font-size: 22px;
+    text-align: center;
+    color: #ffffff;
+}
+
+#add4{
+    width: 540px;
+    height: 38px;
+    margin-top: 15px;
+    border-radius: 4px;
+    border: solid 1px #e6e6e6;
+    background-color: #ee9945;
+    border-radius: 4px;
+    font-family: ThaiSansLite;
+    font-size: 22px;
+    text-align: center;
+    color: #ffffff;
+}
+
+#add5{
+    width: 100%;
+    height: 52px;
+    margin-top: 15px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    font-size: 24px;
+    text-align: center;
+    color: #ffffff;
+    font-family: ThaiSansLite;
+    border: solid 1px #456ebf;
+    background-color: #456ebf;
+}
+
+select {
+    /* padding: 0px 35px; */
+    /* margin: 0px 20px; */
+    font-family: ThaiSansLite;
+    font-size: 20px;
+    border-radius: 4px;
+    color: #373a3c;
+    border: solid 1px #cccccc;
+    background-color: #ffffff;
+}
+
+select.BG{
+    margin-left: -9px;
+    width: 122px;
+    height: 38px;
+    border-radius: 4px;
+    border: solid 1px #cccccc;
+    background-color: #e6e6e6;
+    font-family: ThaiSansLite;
+    font-size: 20px;
+    line-height: 1.05;
+    color: #373a3c;
+}
+
+#Container {
+    width: 100%;
+    padding-right: 29.4%;
+    padding-left: 33.1%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+#Container1 {
+    width: 100%;
+    padding-right: 38%;
+    padding-left: 38%;
+    /* padding-top: 15%; */
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.TopicCreateProject{
+    margin-top: 30px;
+    width: 295px;
+    height: 44px;
+    font-family: ThaiSansLite;
+    font-size: 40px;
+    text-align: left;
+    color: #373a3c;
+}
+
+div.DetailCreateProject {
+    margin-top: 20px;
+    height: 26px;
+    font-family: ThaiSansLite;
+    font-size: 22px;
+    color: #373a3c;
+}
+
+p.DetailCreateProject{
+    margin-bottom: 0;
+}
+
+.fname{
+    margin-bottom: 15px;
+    padding-left: 20px;
+    font-family: ThaiSansLite;
+    font-size: 20px;
+    width: 540px;
+    height: 38px;
+    border-radius: 4px;
+    color: black;
+    border: solid 1px #cccccc;
+    background-color: #ffffff;
+}
+
+.fname1{
+    font-family: Helvetica;
+    font-size: 20px;
+    margin-bottom: 1px;
+    padding-left: 20px;
+    width: 100%;
+    height: 52px;
+    border-radius: 4px;
+    color: black;
+    border: solid 1px #cccccc;
+    background-color: #ffffff;
+}
+
+.fname2{
+    margin-left: 467px;
+    font-family: ThaiSansLite;
+    font-size: 20px;
+    margin-bottom: 1px;
+    padding-left: 20px;
+    width: 500px;
+    height: 38px;
+    border-radius: 4px;
+    color: black;
+    border: solid 1px #cccccc;
+    background-color: #ffffff;
+}
+
+.IconClosePage{
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    color: black;
+    float: right;
+    margin-top: 30px;
+    margin-right: 35px;
+}
+
+body.LoginLayout {
+    background-color: #f5f5f5;
+}
+
+#Vanilla-Team {
+    margin-top: 150px;
+    margin-bottom: 30px;
+    font-family: Baruta;
+    font-size: 50px;
+    font-weight: 900;
+    text-align: center;
+    color: #0045ac;
+}
+
+p.TopicLogin{
+    width: 100%;
+    height: 54px;
+    font-family: ThaiSansLite;
+    font-size: 40px;
+    text-align: center;
+    color: #373a3c;
+}
+
+p.DetailLogin{
+    height: 26px;
+    font-family: ThaiSansLite;
+    font-size: 24px;
+    text-align: center;
+    color: #0f131b;
+}
+
+#RememberMe{
+    margin-left: -10px;
+    width: 107.2px;
+    height: 29px;
+    font-family: ThaiSansLite;
+    font-size: 20px;
+    color: #373a3c;
+}
+
+#row-option-top{
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: 60px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+  
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: solid 2px #ecf0f1;
+}
+
+th.header {
+    font-family: ThaiSansLite;
+    font-size: 22px;
+    color: #373a3c;
+}
+
+div.imPro{
+    margin-top: -10px;
+    position: absolute;
+}
+
+p.Name{
+    font-family: ThaiSansLite;
+    font-size: 26px;
+    color: #373a3c;
+    margin-left: 60px;
+}
+
+p.Email {
+    margin-top: -10px;
+    margin-left: 60px;
+}
+
+.card-project {
+    margin: 0 auto;
+    /* margin-bottom: 20px; */
+}
+
+.sizeIcon-12 {
+    font-size:12px;
+}
+
+.Createproducts {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.25rem;
+}

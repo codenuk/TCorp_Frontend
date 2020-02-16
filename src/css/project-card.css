@@ -1,0 +1,79 @@
+.card-project {
+    margin: 10px;
+    width: 18rem;
+}
+
+.card-project-prgress-bar {
+    margin: 4px 0px;
+}
+
+.card-body p{
+    font-size: 0.79em;
+    margin: 0;
+}
+
+.card-body p.status{
+    font-size: 0.79em;
+    margin: 0;
+    padding-left: 8px;
+}
+
+
+.btn-circle {
+    border-radius: 100%;
+    width: 0.02rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.icon-small {
+    /* height: 1.5rem;
+    width: 1.5rem;
+    font-size: 1rem; */
+    font-size: 0.7rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-success {
+    color: #fff;
+    background-color: #1cc88a;
+    border-color: #1cc88a;
+  }
+
+.btn-unsuccess {
+    color: #fff;
+    background-color: rgb(185, 185, 185);
+    border-color: rgb(185, 185, 185);
+  }
+
+.row-card {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 5px 0px;
+}
+
+.card-sign-TOT {
+    background-color: #3070B7;
+    color: #fff;
+    width: 70px;
+    height: 40px;
+    top: -5px;
+    position: absolute;
+    right: 20px;
+    padding-left: 20px;
+}
+
+.card-sign-CAT {
+    background-color: #E3783A;
+    color: #fff;
+    width: 70px;
+    height: 40px;
+    top: -5px;
+    position: absolute;
+    right: 20px;
+    padding-left: 20px;
+}

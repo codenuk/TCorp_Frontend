@@ -1,0 +1,40 @@
+.has-search .form-control {
+    padding-left: 2.375rem;
+}
+
+.has-search .form-control-feedback {
+    position: absolute;
+    z-index: 2;
+    display: block;
+    width: 2.375rem;
+    height: 2.375rem;
+    line-height: 2.375rem;
+    text-align: center;
+    pointer-events: none;
+    color: #aaa;
+}
+
+@media (min-width: 1600px) {
+    .col-xxl-4{
+        flex: 0 0 33.333333%;
+        max-width: 33.333333%;
+    }
+}
+
+.filterDiv {
+    float: left;
+    color: #495057;
+    margin: 2px;
+    display: none;
+  }
+ 
+.filterDiv2 {
+    float: left;
+    color: #495057;
+    margin: 2px;
+    display: none;
+}
+ 
+.show {
+    display: block;
+}

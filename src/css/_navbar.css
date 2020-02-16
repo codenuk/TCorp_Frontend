@@ -1,0 +1,37 @@
+/* You can check to 'simple-sidebar' */
+
+.bg-dark-vanilla {
+    background-color: #0f131b !important;
+    color: #c4c4c4;
+    height: 100%;
+}
+
+.bg-white {
+    font-size: 1.4rem;
+}
+
+.icon-fas-nav {
+    font-size: 0.6em;
+    padding: 0px 10px 0px 0px;
+    /* 25px 50px 75px 100px; */
+}
+
+.sidebar-heading {
+    font-size: 1.2rem;
+    text-transform: uppercase;
+}
+
+.sidebar-projects {
+    font-size: 1.2rem;
+    padding: .1rem 1.25rem;
+    text-transform: uppercase;
+}
+
+.list-group-item {
+    padding: .1rem 1.25rem;
+}
+
+#menu-toggle {
+    background-color: #0f131b !important;
+    font-size: 1.3rem
+}

@@ -1,0 +1,42 @@
+@font-face {
+    font-family: ThaiSansLite;
+    src: url(../font/thaisanslite/thaisanslite_r1.ttf);
+}
+
+@font-face {
+    font-family: Helvetica;
+    src: url(../font/Helvetica.ttf);
+}
+
+@font-face {
+    font-family: Baruta;
+    src: url(../font/Baruta/RNS-B__2.woff);
+}
+
+body {
+    font-family: ThaiSansLite;
+}
+
+.form-control {
+    font-size: 1.3rem;
+    font-weight: 400;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    table-layout: auto;
+}
+
+th {
+    /* padding: 8px; */
+    font-size: 1.3em;
+    /* text-align: left; */
+    /* border-bottom: 1px solid rgb(45, 45, 45); */
+}
+td {
+    /* padding: 8px; */
+    font-size: 1.3em;
+    /* text-align: left; */
+    border-bottom: 1px solid #ddd;
+}
