@@ -252,7 +252,7 @@ class EditProject extends React.Component {
                                 <h1>แก้ไขรายละเอียดโปรเจคที่: {projectIdOld.tcorp_id}</h1>
                                 <div className="row">
                                     <button type="button" onClick={(e) => { if (window.confirm('คุณต้องการยกเลิกโปรเจคนี้หรือไม่?')) this.handleAborted(e) }} className="btn btn-dark mr-0 ml-auto">{projectIdOld.is_aborted === 0 ? 'ยกเลิกโปรเจค' : 'ใช้งานโปรเจค'}</button>
-                                    <button gonClick={(e) => { if (window.confirm('คุณต้องการที่จะลบโปรเจคนี้หรือไม่?')) this.handleDelete(e) }} className="btn btn-danger ml-1">ลบโปรเจค</button>
+                                    <button type="button" onClick={(e) => { if (window.confirm('คุณต้องการที่จะลบโปรเจคนี้หรือไม่?')) this.handleDelete(e) }} className="btn btn-danger ml-1">ลบโปรเจค</button>
                                 </div>
                                 <div className="form-group">
                                     <h4>ชื่อโปรเจค</h4>
