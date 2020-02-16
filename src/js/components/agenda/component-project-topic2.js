@@ -46,7 +46,7 @@ class ComponentProjectTopic extends React.Component {
         this.getData(this.props.tcorp_id).then(function (data) {
             var headDetail = data.headDetail;
             var headBoqId = data.headBoqId;
-            // console.log("COMPONENTDIDMOUNT head Detail", headDetail);
+            console.log("COMPONENTDIDMOUNT head Detail", headDetail);
             current.setState({ headDetail: headDetail, isTokenValid: true , headBoqId: headBoqId});
             // console.log("COMPONENTDIDMOUNT state", current.state);
         }).catch(function (err) {
@@ -133,6 +133,8 @@ class ComponentProjectTopic extends React.Component {
                             <h4>โครงการ: {checkNanData(headDetail.description)} </h4>
                             <h4>ลูกค้า: {headDetail.name} </h4>
                             <h4>ประเภทงาน: {headDetail.type} </h4>
+                            <h4>เซ็นสัญญาวันที่:  </h4>
+                            <h4>เลขที่สัญญา: {headDetail.contract_id} </h4>
                             <div className="row">
                                 <div className="col-4">
                                     <h4>มูลค่างาน: {checkNanDataPrice(headDetail.value.toLocaleString())} บาท</h4>
