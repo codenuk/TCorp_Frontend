@@ -6,7 +6,6 @@ import NumberFormat from 'react-number-format';
 import { API_URL_DATABASE } from '../../config_database.js';
 
 class EditProject extends React.Component {
-
     state = {
         projectIdOlds: [],
         customers: [],
@@ -28,36 +27,36 @@ class EditProject extends React.Component {
     }
 
     handleChangeName = event => {
-        if(event.target.value.length <= 255){
+        if (event.target.value.length <= 255) {
             this.setState({ name_th: event.target.value });
         }
     }
 
     handleChangeDescription = event => {
-        if(event.target.value.length <= 255){
+        if (event.target.value.length <= 255) {
             this.setState({ description: event.target.value });
         }
     }
 
     handleChangeValue = event => {
         console.log(event.target.value)
-        if (event.target.value !== "" && event.target.value.length <= 25){
+        if (event.target.value !== "" && event.target.value.length <= 25) {
             this.setState({ value: event.target.value });
         }
-        else{
+        else {
             this.setState({ value: 0 });
         }
     }
 
     handleChangeContractIdName = event => {
-        if(event.target.value.length <= 44){
+        if (event.target.value.length <= 44) {
             this.setState({ contract_id: event.target.value });
         }
     }
 
     handleChangeEndContractDate = event => {
-        if(event.target.value.length <= 10){
-            console.log("date",event.target.value.length)
+        if (event.target.value.length <= 10) {
+            console.log("date", event.target.value.length)
             this.setState({ end_contract_date: event.target.value });
         }
     }
@@ -77,7 +76,7 @@ class EditProject extends React.Component {
     handleAborted = event => {
         event.preventDefault();
         console.log("handleAborted")
-        var info = {"is_aborted": 0}
+        var info = { "is_aborted": 0 }
         if (this.state.projectIdOlds[0].is_aborted === 0) {
             info['is_aborted'] = 1
         }
@@ -141,7 +140,7 @@ class EditProject extends React.Component {
                 this.setState({
                     projectIdOlds: projectIdOlds,
                     isTokenValid: true,
-                    
+
                     name_th: projectIdOlds[0].name_th,
                     description: projectIdOlds[0].description,
                     value: projectIdOlds[0].value,
@@ -193,7 +192,7 @@ class EditProject extends React.Component {
 
     handleDelete = () => {
         var token_auth = localStorage.getItem('token_auth');
-        console.log("check token ",token_auth)
+        console.log("check token ", token_auth)
         axios.delete(`http://vanilla-erp.com:${API_URL_DATABASE}/api/v1/projects/${this.props.match.params.tcorp_id}`, { headers: { 'x-access-token': token_auth } })
             .then(res => {
                 console.log(res);
@@ -219,10 +218,10 @@ class EditProject extends React.Component {
         var y = data.toString().length;
         // console.log("dot price", x)
         // console.log("dot 2", y)
-        if(x === -1){
+        if (x === -1) {
             return data + ".00";
         }
-        if(y-x === 2){
+        if (y - x === 2) {
             return data + "0";
         }
         return data;
@@ -252,8 +251,8 @@ class EditProject extends React.Component {
                             <form onSubmit={this.handleSubmit}>
                                 <h1>แก้ไขรายละเอียดโปรเจคที่: {projectIdOld.tcorp_id}</h1>
                                 <div className="row">
-                                    <button onClick={(e) => { if (window.confirm('คุณต้องการยกเลิกโปรเจคนี้หรือไม่?')) this.handleAborted(e) }} className="btn btn-dark mr-0 ml-auto">{projectIdOld.is_aborted===0 ? 'ยกเลิกโปรเจค':'ใช้งานโปรเจค'}</button>
-                <button onClick={(e) => { if (window.confirm('คุณต้องการที่จะลบโปรเจคนี้หรือไม่?')) this.handleDelete(e) }} className="btn btn-danger ml-1">ลบโปรเจค</button>
+                                    <button type="button" onClick={(e) => { if (window.confirm('คุณต้องการยกเลิกโปรเจคนี้หรือไม่?')) this.handleAborted(e) }} className="btn btn-dark mr-0 ml-auto">{projectIdOld.is_aborted === 0 ? 'ยกเลิกโปรเจค' : 'ใช้งานโปรเจค'}</button>
+                                    <button gonClick={(e) => { if (window.confirm('คุณต้องการที่จะลบโปรเจคนี้หรือไม่?')) this.handleDelete(e) }} className="btn btn-danger ml-1">ลบโปรเจค</button>
                                 </div>
                                 <div className="form-group">
                                     <h4>ชื่อโปรเจค</h4>
