@@ -153,7 +153,6 @@ class AdminProfileDetails extends React.Component {
                                 <div className="row">
                                     <div className="col-12">
                                         <h2> {this.nameUpperLower(user_info.firstname)} {this.nameUpperLower(user_info.lastname)} </h2>
-
                                         <h4>
                                             ตำแหน่งงาน: 
                                         <select className="form-control" onChange={this.handleChangeRoleID}>
@@ -179,6 +178,7 @@ class AdminProfileDetails extends React.Component {
                                         </h4>
 
                                         <h3>รายละเอียดเพิ่มเติม</h3>
+                                        <h5> Username: {user_info.username} </h5>
                                         <h5>Email: {this.checkNanData(user_info.email)} </h5>
                                         <h5>เบอร์ติดต่อ: {this.checkNanData(user_info.phone)} </h5>
                                         <h5>เพศ: {this.checkGender(user_info.gender)} </h5>
