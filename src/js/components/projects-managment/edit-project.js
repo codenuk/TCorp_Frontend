@@ -19,7 +19,7 @@ class EditProject extends React.Component {
         name_th: "",
         description: "",
         value: "",
-        // sign_contract: "",
+        sign_contract: "",
         contract_id: "",
         end_contract_date: "",
         billing_configuration_id: "",
@@ -42,18 +42,23 @@ class EditProject extends React.Component {
     handleChangeValue = event => {
         console.log(event.target.value)
         if (event.target.value !== "" && event.target.value.length <= 25) {
-            this.setState({ value: event.target.value });
+            var value_not_comma = event.target.value;
+            for (var i = 0; i < 4; i++) {
+                value_not_comma = value_not_comma.replace(",", "");
+                this.setState({ value: value_not_comma });
+                console.log("hello", value_not_comma)
+            }
         }
         else {
             this.setState({ value: 0 });
         }
     }
 
-    // handleChangeSignContract = event => {
-    //     if(event.target.value.length <= 10){
-    //         this.setState({ sign_contract: event.target.value });
-    //     }
-    // }
+    handleChangeSignContract = event => {
+        if(event.target.value.length <= 10){
+            this.setState({ sign_contract: event.target.value });
+        }
+    }
 
     handleChangeContractIdName = event => {
         if (event.target.value.length <= 44) {
@@ -95,7 +100,6 @@ class EditProject extends React.Component {
                 this.setState({ isTokenValid: true });
             }).catch(function (err) {
                 console.log(err);
-                // this.setState({ isTokenValid: false });
             })
 
     }
@@ -103,18 +107,11 @@ class EditProject extends React.Component {
     handleSubmit = event => {
         event.preventDefault();
 
-        var value_not_comma = this.state.value;
-        for (var i = 0; i < 4; i++) {
-            value_not_comma = value_not_comma.replace(",", "");
-            this.setState({ value: value_not_comma });
-            console.log("hello", value_not_comma)
-        }
-
         const project = {
             "name_th": this.state.name_th,
             "description": this.state.description,
-            "value": value_not_comma,
-            // "sign_contract": this.state.sign_contract,
+            "value": this.state.value,
+            "sign_contract": this.state.sign_contract.substring(0, 10),
             "contract_id": this.state.contract_id,
             "end_contract_date": this.state.end_contract_date,
             "billing_configuration_id": this.state.billing_configuration_id,
@@ -130,7 +127,6 @@ class EditProject extends React.Component {
                 this.setState({ isTokenValid: true });
             }).catch(function (err) {
                 console.log(err);
-                // this.setState({ isTokenValid: false });
             })
 
     }
@@ -152,7 +148,7 @@ class EditProject extends React.Component {
                     name_th: projectIdOlds[0].name_th,
                     description: projectIdOlds[0].description,
                     value: projectIdOlds[0].value,
-                    // sign_contract: projectIdOlds[0].sign_contract,
+                    sign_contract: projectIdOlds[0].sign_contract,
                     contract_id: projectIdOlds[0].contract_id,
                     end_contract_date: projectIdOlds[0].end_contract_date.substring(0, 10),
                     billing_configuration_id: projectIdOlds[0].billing_configuration_id,
@@ -275,10 +271,10 @@ class EditProject extends React.Component {
                                     <h4>มูลค่างาน</h4>
                                     <NumberFormat className="form-control" onChange={this.handleChangeValue} thousandSeparator={true} defaultValue={projectIdOld.value} />
                                 </div>
-                                {/* <div className="form-group">
+                                <div className="form-group">
                                     <h4>วันที่เซ็นสัญญา</h4>
-                                    <input type="date" className="form-control" onChange={this.handleChangeSignContract} />
-                                </div> */}
+                                    <input type="date" className="form-control" onChange={this.handleChangeSignContract} defaultValue={this.checkNullDate(projectIdOld.sign_contract)}/>
+                                </div>
                                 <div className="form-group">
                                     <h4>สัญญาเลขที่</h4>
                                     <input type="text" className="form-control" id="exampleInputPassword1" onChange={this.handleChangeContractIdName} defaultValue={this.checkNanData(projectIdOld.contract_id)} />

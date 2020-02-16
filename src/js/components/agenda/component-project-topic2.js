@@ -21,23 +21,23 @@ class ComponentProjectTopic extends React.Component {
         return new Promise((resolve, reject) => {
             var token_auth = localStorage.getItem('token_auth');
             console.log("I am getting data. this.props.tcorp_id", tcorp_id)
-            
-            axios.get(`http://vanilla-erp.com:${API_URL_DATABASE}/api/v1/projects/${tcorp_id}`, { headers: { 'x-access-token': token_auth } })
-            .then(res => {
-                var headDetail = res.data; 
-                axios.get(`http://vanilla-erp.com:${API_URL_DATABASE}/api/v1/boqs/${tcorp_id}`, { headers: { 'x-access-token': token_auth } })
-                .then(res => {
-                    // console.log(">>>>> headBoqId #1", res);
-                    var headBoqId = res.data[0].id;
-                    resolve({ headDetail: headDetail, headBoqId: headBoqId}); 
 
+            axios.get(`http://vanilla-erp.com:${API_URL_DATABASE}/api/v1/projects/${tcorp_id}`, { headers: { 'x-access-token': token_auth } })
+                .then(res => {
+                    var headDetail = res.data;
+                    axios.get(`http://vanilla-erp.com:${API_URL_DATABASE}/api/v1/boqs/${tcorp_id}`, { headers: { 'x-access-token': token_auth } })
+                        .then(res => {
+                            // console.log(">>>>> headBoqId #1", res);
+                            var headBoqId = res.data[0].id;
+                            resolve({ headDetail: headDetail, headBoqId: headBoqId });
+
+                        })
+                        .catch(reject);
                 })
-		.catch(reject);
-            })
-	    .catch(reject);
+                .catch(reject);
             // var headBoqId = await axios.get(`http://vanilla-erp.com:${API_URL_DATABASE}/api/v1/boqs/${this.props.tcorp_id}`, { headers: { 'x-access-token': token_auth } })
             // http://vanilla-erp.com:${API_URL_DATABASE}/api/v1/boqs/T1234
-                       // console.log(">>>>> headBoqId #2", headBoqId, this.props.tcorp_id);
+            // console.log(">>>>> headBoqId #2", headBoqId, this.props.tcorp_id);
         });
     }
 
@@ -47,7 +47,7 @@ class ComponentProjectTopic extends React.Component {
             var headDetail = data.headDetail;
             var headBoqId = data.headBoqId;
             console.log("COMPONENTDIDMOUNT head Detail", headDetail);
-            current.setState({ headDetail: headDetail, isTokenValid: true , headBoqId: headBoqId});
+            current.setState({ headDetail: headDetail, isTokenValid: true, headBoqId: headBoqId });
             // console.log("COMPONENTDIDMOUNT state", current.state);
         }).catch(function (err) {
             console.log(err);
@@ -106,10 +106,10 @@ class ComponentProjectTopic extends React.Component {
             var y = data.toString().length;
             // console.log("dot price", x)
             // console.log("dot 2", y)
-            if(x === -1){
+            if (x === -1) {
                 return data + ".00";
             }
-            if(y-x === 2){
+            if (y - x === 2) {
                 return data + "0";
             }
             return data;
@@ -133,16 +133,22 @@ class ComponentProjectTopic extends React.Component {
                             <h4>โครงการ: {checkNanData(headDetail.description)} </h4>
                             <h4>ลูกค้า: {headDetail.name} </h4>
                             <h4>ประเภทงาน: {headDetail.type} </h4>
-                            <h4>เซ็นสัญญาวันที่:  </h4>
-                            <h4>เลขที่สัญญา: {headDetail.contract_id} </h4>
                             <div className="row">
-                                <div className="col-4">
+                                <div className="col-3">
+                                    <h4>เลขที่สัญญา: {headDetail.contract_id} </h4>
+                                </div>
+                                <div className="col-9">
+                                    <h4>เซ็นสัญญาวันที่: {checkNullDate(headDetail.sign_contract)} </h4>
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="col-3">
                                     <h4>มูลค่างาน: {checkNanDataPrice(headDetail.value.toLocaleString())} บาท</h4>
                                 </div>
-                                <div className="col-4">
+                                <div className="col-6">
                                     <h4>ส่งมอบงานภายใน: {checkNullDate(headDetail.end_contract_date)} (เหลืออีก {diffTime(headDetail.end_contract_date)} วัน) </h4>
                                 </div>
-                                <div className="col-4">
+                                <div className="col-3">
                                     <h4>สถานะ: ตามแผน</h4>
                                 </div>
                             </div>
