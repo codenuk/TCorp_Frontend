@@ -8,6 +8,8 @@ import '../../../vendor/fontawesome-free/css/all.css';
 import '../../../css/mystyles.css';
 import logo from '../../../images/avatar.jpg';
 
+import { API_URL_DATABASE } from '../../config_database.js';
+
 class componentUserManagement extends React.Component {
 
     state = {
@@ -19,7 +21,7 @@ class componentUserManagement extends React.Component {
         // console.log(`Sending with headers ${localStorage.getItem('token_auth')}`);
         var token_auth = localStorage.getItem('token_auth');
         var current = this;
-        axios.get(`http://vanilla-erp.com:10000/api/v1/users`, { headers: { 'x-access-token': token_auth } })
+        axios.get(`http://vanilla-erp.com:${API_URL_DATABASE}/api/v1/users`, { headers: { 'x-access-token': token_auth } })
             .then(res => {
                 console.log(res)
                 const allUsers = res.data;
@@ -63,8 +65,8 @@ class componentUserManagement extends React.Component {
                         <th></th>
                         <th>Name</th>
                         <th>Role</th>
-                        <th>First activate date</th>
-                        <th>Last activate date</th>
+                        <th>Create At</th>
+                        <th>Last login</th>
                         <th>Status</th>
                         <th>Update</th>
                     </tr>

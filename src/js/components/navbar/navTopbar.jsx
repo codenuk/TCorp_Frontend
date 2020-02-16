@@ -13,6 +13,8 @@ import '../../../css/mystyles.css';
 
 import $ from 'jquery';
 
+import { API_URL_DATABASE } from '../../config_database.js';
+
 class NavTopbar extends React.Component {
     constructor(props) {
         super(props);
@@ -25,13 +27,13 @@ class NavTopbar extends React.Component {
     }
 
     componentDidMount() {
-        console.log(`>>>>>>>>>>>>>>>>>>>NUK  ${localStorage.getItem('token_auth')}`);
+        // console.log(`>>>>>>>>>>>>>>>>>>>NUK  ${localStorage.getItem('token_auth')}`);
         var token_auth = localStorage.getItem('token_auth');
         var decoded = jwt_decode(token_auth);
         var username = decoded.username;
-        axios.get(`http://vanilla-erp.com:10000/api/v1/users/${username}`, { headers: { 'x-access-token': token_auth } })
+        axios.get(`http://vanilla-erp.com:${API_URL_DATABASE}/api/v1/users/${username}`, { headers: { 'x-access-token': token_auth } })
             .then(res => {
-                console.log(res)
+                // console.log(res)
                 const user_infoes = res.data;
                 this.setState({ user_infoes: user_infoes });
             })
@@ -46,7 +48,7 @@ class NavTopbar extends React.Component {
     }
 
     getUsername() {
-        console.log(`Sending with headers navTopbar  ${localStorage.getItem('token_auth')}`);
+        // console.log(`Sending with headers navTopbar  ${localStorage.getItem('token_auth')}`);
         var token_auth = localStorage.getItem('token_auth');
         var decoded = jwt_decode(token_auth);
         var username = decoded.username;

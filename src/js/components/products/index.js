@@ -2,8 +2,6 @@ import React from 'react';
 
 import NavSidebar from '../navbar/navSidebar'
 import NavTopbar from '../navbar/navTopbar'
-import ComponentCreateProduct from './create-products';
-import ComponentSearchProduct from './search-products';
 import ComponentListProducts from './list-products';
 
 class Products extends React.Component {
@@ -20,11 +18,8 @@ class Products extends React.Component {
 
                     {/*  Content  */}
                     <div className="container-fluid">
-                        <div><ComponentCreateProduct /></div>
-                        <br />
 
                         <div className=""> 
-                            <div><ComponentSearchProduct /></div>
                             <div><ComponentListProducts /></div>
                         </div>
 

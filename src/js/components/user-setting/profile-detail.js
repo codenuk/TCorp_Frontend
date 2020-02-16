@@ -9,6 +9,8 @@ import '../../../vendor/fontawesome-free/css/all.css';
 import '../../../css/mystyles.css';
 import logo from '../../../images/avatar.jpg';
 
+import { API_URL_DATABASE } from '../../config_database.js';
+
 class ProfileDetails extends React.Component {
 
     state = {
@@ -22,7 +24,7 @@ class ProfileDetails extends React.Component {
         var decoded = jwt_decode(token_auth);
         var username = decoded.username;
         var current = this;
-        axios.get(`http://vanilla-erp.com:10000/api/v1/users/${username}`, { headers: { 'x-access-token': token_auth } })
+        axios.get(`http://vanilla-erp.com:${API_URL_DATABASE}/api/v1/users/${username}`, { headers: { 'x-access-token': token_auth } })
             .then(res => {
                 console.log(res)
                 const user_infos = res.data;

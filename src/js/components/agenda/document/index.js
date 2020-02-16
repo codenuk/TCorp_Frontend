@@ -21,7 +21,7 @@ class Boq extends React.Component {
                     <div className="container-fluid">
                         <div><ComponentProjectTopic tcorp_id={this.props.match.params.tcorp_id}/></div>
                         <div className="row">
-                            <div className="col-12">
+                            <div className="col-12 mt-2">
                                 <div><ListDocumenr tcorp_id={this.props.match.params.tcorp_id}/></div>
                             </div>
                         </div>

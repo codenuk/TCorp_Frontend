@@ -8,6 +8,8 @@ import '../../../../vendor/fontawesome-free/css/all.css';
 import '../../../../css/mystyles.css';
 import logo from '../../../../images/avatar.jpg';
 
+import { API_URL_DATABASE } from '../../../config_database.js';
+
 class AdminProfileDetails extends React.Component {
 
     state = {
@@ -40,7 +42,7 @@ class AdminProfileDetails extends React.Component {
         var current = this;
         // console.log(`Sending with headers ${localStorage.getItem('token_auth')}`);
         var token_auth = localStorage.getItem('token_auth');
-        axios.put(`http://vanilla-erp.com:10000/api/v1/users/${this.props.username}`, edited, { headers: { "x-access-token": token_auth } })
+        axios.put(`http://vanilla-erp.com:${API_URL_DATABASE}/api/v1/users/${this.props.username}`, edited, { headers: { "x-access-token": token_auth } })
             .then(res => {
                 console.log(res);
                 this.setState({ isFinish: true });
@@ -55,7 +57,7 @@ class AdminProfileDetails extends React.Component {
         // console.log(`Sending with headers ${localStorage.getItem('token_auth')}`);
         var token_auth = localStorage.getItem('token_auth');
         var current = this;
-        axios.get(`http://vanilla-erp.com:10000/api/v1/users/${this.props.username}`, { headers: { 'x-access-token': token_auth } })
+        axios.get(`http://vanilla-erp.com:${API_URL_DATABASE}/api/v1/users/${this.props.username}`, { headers: { 'x-access-token': token_auth } })
             .then(res => {
                 console.log(res)
                 const user_infos = res.data;
@@ -71,7 +73,7 @@ class AdminProfileDetails extends React.Component {
                 current.setState({ isTokenValid: false });
             });
 
-        axios.get(`http://vanilla-erp.com:10000/api/v1/users/role`, { headers: { 'x-access-token': token_auth } })
+        axios.get(`http://vanilla-erp.com:${API_URL_DATABASE}/api/v1/users/role`, { headers: { 'x-access-token': token_auth } })
             .then(res => {
                 console.log(res)
                 const roles = res.data;
@@ -106,8 +108,8 @@ class AdminProfileDetails extends React.Component {
         if(date !== null){
             return date.slice(0, 10);
         }
-        var na = "N/A"
-        return na
+        // var na = "N/A"
+        return "N/A"
     }
 
     checkNanData(data){
@@ -153,7 +155,7 @@ class AdminProfileDetails extends React.Component {
                                         <h2> {this.nameUpperLower(user_info.firstname)} {this.nameUpperLower(user_info.lastname)} </h2>
 
                                         <h4>
-                                            ตำแหน่งงาน:
+                                            ตำแหน่งงาน: 
                                         <select className="form-control" onChange={this.handleChangeRoleID}>
                                                 {this.state.roles.map(function (role) {
                                                     if(role.id===user_info.role_id) return <option value={role.id} selected> {role.name} </option>

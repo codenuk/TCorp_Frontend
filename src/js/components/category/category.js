@@ -1,163 +1,197 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
+import axios from 'axios';
+import { Link, Redirect } from 'react-router-dom'
 
 import '../../../css/_list_Category.css';
 
+import { API_URL_DATABASE } from '../../config_database.js';
+
 class ListCategory extends React.Component {
 
-    // FilterSelection First Column
-    filterSelection(c) {
-        var x, i;
-        x = document.getElementsByClassName("filterDiv");
-        if (c === "all") c = "";
-        for (i = 0; i < x.length; i++) {
-            this.w3RemoveClass(x[i], "show")
-            if (x[i].className.indexOf(c) > -1) 
-                this.w3AddClass(x[i], "show") 
-            ;
-        }
-    };
+    // Define State and Props
+    constructor(props) {
+        super(props);
+        this.state = {
+            category: [],
+            filter_name: [],
+            indexOfItem: -1,
+            isTokenValid: true,
+            isFinish: false,
 
-    w3AddClass(element, name) {
-        var i, arr1, arr2;
-        arr1 = element.className.split(" ");
-        arr2 = name.split(" ");
-        for (i = 0; i < arr2.length; i++) {
-            if (arr1.indexOf(arr2[i]) === -1) { element.className += " " + arr2[i]; }
+            //EDITE CATEGORY
+            name: '',
+            description: ''
         }
-    };
 
-    w3RemoveClass(element, name) {
-        var i, arr1, arr2;
-        arr1 = element.className.split(" ");
-        arr2 = name.split(" ");
-        for (i = 0; i < arr2.length; i++) {
-            while (arr1.indexOf(arr2[i]) > -1) {
-                arr1.splice(arr1.indexOf(arr2[i]), 1);
-            }
-        }
-        element.className = arr1.join(" ");
+        this.onAddItem = this.onAddItem.bind(this);
+        this.generateListCategory = this.generateListCategory.bind(this);
+        this.generateListCategoryRow = this.generateListCategoryRow.bind(this);
+        this.filterCategory = this.filterCategory.bind(this);
+        this.checkName = this.checkName.bind(this);
+        this.buttonSubmit = this.buttonSubmit.bind(this);
     }
 
-    filterSelection2(c) {
-        var x, i;
-        x = document.getElementsByClassName("filterDiv2");
-        if (c === "all") c = "";
-        for (i = 0; i < x.length; i++) {
-            this.w3RemoveClass2(x[i], "show") ;
-            if (x[i].className.indexOf(c) > -1) { this.w3AddClass2(x[i], "show") };
+    handleChangeName = event => {
+        var current = this;
+        var a = this.state.filter_name.indexOf(event.target.value);
+        console.log("Hello filter >>>>", a)
+        this.setState({ indexOfItem: a })
+        if(event.target.value.length <= 45 && a === -1){
+            current.setState({ name: event.target.value });
         }
     }
 
-    w3AddClass2(element, name) {
-        var i, arr1, arr2;
-        arr1 = element.className.split(" ");
-        arr2 = name.split(" ");
-        for (i = 0; i < arr2.length; i++) {
-            if (arr1.indexOf(arr2[i]) === -1) { element.className += " " + arr2[i]; }
+    handleChangeDescription = event => {
+        if(event.target.value.length <= 45){
+            this.setState({ description: event.target.value });
         }
     }
 
-    w3RemoveClass2(element, name) {
-        var i, arr1, arr2;
-        arr1 = element.className.split(" ");
-        arr2 = name.split(" ");
-        for (i = 0; i < arr2.length; i++) {
-            while (arr1.indexOf(arr2[i]) > -1) {
-                arr1.splice(arr1.indexOf(arr2[i]), 1);
-            }
+    handleSubmit = event => {
+        event.preventDefault();
+
+        const postCategory = {
+            "name": this.state.name,
+            "description": this.state.description
+        };
+        console.log("postCategory", postCategory)
+
+        axios.post(`http://vanilla-erp.com:${API_URL_DATABASE}/api/v1/product_categories`, postCategory, { headers: { "x-access-token": localStorage.getItem('token_auth') } })
+            .then(res => {
+                // console.log(res);
+                this.setState({ isFinish: true });
+                window.location.reload();
+                // this.setState({isTokenValid: true});
+            }).catch(function (err) {
+                console.log(err);
+                // this.setState({isTokenValid: false});
+            })
+
+    }
+
+    componentDidMount() {
+        var token_auth = localStorage.getItem('token_auth');
+        var current = this;
+
+        axios.get(`http://vanilla-erp.com:${API_URL_DATABASE}/api/v1/product_categories`, { headers: { 'x-access-token': token_auth } })
+            .then(res => {
+                console.log("category", res)
+                const category = res.data;
+                this.setState({
+                    category: category,
+                    isTokenValid: true
+                });
+                current.filterCategory();
+
+            })
+            .catch(function (err) {
+                current.setState({ isTokenValid: false });
+            });
+    }
+
+    filterCategory(){
+        var filter_name = []
+        this.state.category.map(function(category){
+            filter_name.push(category.name);
+        })
+        this.setState({ filter_name: filter_name})
+        // console.log("hello filter", this.state.filter_name)
+    }
+
+    checkName(){
+        console.log("indexOfItem", this.state.indexOfItem)
+        if (this.state.indexOfItem !== -1){
+            return <label className="ml-2 mt-2" style={{color: "#ff6666"}}>รหัสสินค้าซ้ำ</label>
         }
-        element.className = arr1.join(" ");
+    }
+
+    buttonSubmit(){
+        if (this.state.indexOfItem !== -1){
+            return <button type="button" className="btn btn-warning px-4">เพิ่มหมวดหมู่สินค้า</button>
+        }
+        return <button type="submit" className="btn btn-warning px-4">เพิ่มหมวดหมู่สินค้า</button>
+    }
+
+    onAddItem(event) {
+        console.log("onAddItem", event.target.id)
+    }
+
+    generateListCategoryRow() {
+        return (
+            <>
+                <li class="list-group-item list-group-item-action border-0" key={'Cras justo odio'} id={'Cras justo odio'} onClick={this.onAddItem}>Cras justo odio</li>
+            </>
+        )
+    }
+
+    generateListCategory(layerCategory) {
+        let listCategory = []
+        console.log("=== generateListCategory: listCategory=", listCategory, "layerCategory=", layerCategory)
+        listCategory.push(this.generateListCategoryRow())
+
+        return listCategory;
     }
 
     render() {
+        if (!this.state.isTokenValid) {
+            return <Redirect to='/' />
+        }
         return (
             <div>
-                <h3>รายการหมวดหมู่สินค้า</h3>
-                <div className="row">
-                    {/* Fisrt Column  */}
-                    <div className="col-xxl-4 col-xl-6 border pb-4 pl-4" style={{ fontSize: "1.4rem" }}>
-                        {/* Actual search box  */}
-                        <div className="form-group has-search d-inline " >
-                            <span className="fa fa-search form-control-feedback mt-2"></span>
-                            <input type="text" className="form-control w-75 d-inline my-2" placeholder="Search" />
 
-                            <button className="btn btn-secondary mx-1 " type="button" data-toggle="modal"
-                                data-target="#myModal">
-                                <i className="fas fa-plus"></i>
-                            </button>
-                            <button className="btn btn-secondary mx-1 " type="button">
-                                <i className="fas fa-minus"></i>
-                            </button>
-                        </div>
-                        {/* End search  */}
-
-                        <div className="list-group">
-                            <Link to="#" className="list-group-item list-group-item-action border-0"
-                                onclick={this.filterSelection('wire')}>สายไฟ</Link>
-                            <Link to="#" className="list-group-item list-group-item-action border-0"
-                                onclick={this.filterSelection('harddisk')}>ฮาสดิส</Link>
-
-                        </div>
+                <div className="Createproducts">
+                    <div className="card-header">
+                        <h4>เพิ่มหมวดหมู่สินค้า:</h4>
                     </div>
-                    {/* End First Column  */}
-
-                    {/* <!-- Second Column --> */}
-                    <div className="col-xxl-4 col-xl-6 border pb-4 pl-4" style={{ fontSize: "1.4rem" }}>
-                        {/* <!-- Actual search box --> */}
-                        <div className="form-group has-search d-inline ">
-                            <span className="fa fa-search form-control-feedback mt-2"></span>
-                            <input type="text" className="form-control w-75 d-inline my-2" placeholder="Search" />
-
-                            <button className="btn btn-secondary mx-1 " type="button" data-toggle="modal"
-                                data-target="#myModal">
-                                <i className="fas fa-plus"></i>
-                            </button>
-                            <button className="btn btn-secondary mx-1 " type="button">
-                                <i className="fas fa-minus"></i>
-                            </button>
+                    <form onSubmit={this.handleSubmit}>
+                        <div className="card-body p-4">
+                            <div className="form-group row">
+                                <label for="staticEmail" className="col-sm-2 col-form-label-lg">หมวดหมู่</label>
+                                <div className="col-sm-10">
+                                    <input type="text" className="form-control" onChange={this.handleChangeName} required />
+                                    {this.checkName()}
+                                </div>
+                            </div>
+                            <div className="form-group row">
+                                <label for="inputPassword" className="col-sm-2 col-form-label-lg">รายละเอียดหมวดหมู่</label>
+                                <div className="col-sm-10">
+                                    <input type="text" className="form-control" onChange={this.handleChangeDescription} required />
+                                </div>
+                            </div>
+                            <div className="form-group row float-right">
+                                <div className="col-lg-12">
+                                    {this.buttonSubmit()}
+                                </div>
+                            </div>
                         </div>
-                        {/* <!-- End search --> */}
-
-                        <div className="list-group">
-                            <Link to="#" className="list-group-item list-group-item-action border-0 filterDiv wire" onclick={this.filterSelection2('wire1')}>สายไฟ1</Link>
-                            <Link to="#" className="list-group-item list-group-item-action border-0 filterDiv wire" onclick={this.filterSelection2('wire2')}>สายไฟ2</Link>
-                            <Link to="#" className="list-group-item list-group-item-action border-0 filterDiv wire" onclick={this.filterSelection2('wire3')}>สายไฟ3</Link>
-                            <Link to="#" className="list-group-item list-group-item-action border-0 filterDiv harddisk" onclick="filterSelection2('harddisk1')">ฮาสดิส1</Link>
-                        </div>
-                    </div>
-                    {/* <!-- End Second Column --></div> */}
-
-                    {/* <!-- Third Column --> */}
-                    <div className="col-xxl-4 col-xl-6 border pb-4 pl-4" style={{ fontSize: "1.4rem" }}>
-                        {/* <!-- Actual search box --> */}
-                        <div className="form-group has-search d-inline ">
-                            <span className="fa fa-search form-control-feedback mt-2"></span>
-                            <input type="text" className="form-control w-75 d-inline my-2" placeholder="Search" />
-
-                            <button className="btn btn-secondary mx-1 " type="button" data-toggle="modal"
-                                data-target="#myModal">
-                                <i className="fas fa-plus"></i>
-                            </button>
-                            <button className="btn btn-secondary mx-1 " type="button">
-                                <i className="fas fa-minus"></i>
-                            </button>
-                        </div>
-                        {/* <!-- End search --> */}
-
-                        <div className="list-group">
-                            <Link to="#" className="list-group-item list-group-item-action border-0 filterDiv2 wire1">wire1/1</Link>
-                            <Link to="#" className="list-group-item list-group-item-action border-0 filterDiv2 wire1">wire1/2</Link>
-                            <Link to="#" className="list-group-item list-group-item-action border-0 filterDiv2 wire1">wire1/3</Link>
-                            <Link to="#" className="list-group-item list-group-item-action border-0 filterDiv2 wire2">wire2/1</Link>
-                            <Link to="#" className="list-group-item list-group-item-action border-0 filterDiv2 wire3">wire3/2</Link>
-                            <Link to="#" className="list-group-item list-group-item-action border-0 filterDiv2 wire3">wire3/3</Link>
-                            <Link to="#" className="list-group-item list-group-item-action border-0 filterDiv2 harddisk1">harddisk1/1</Link>
-                            <Link to="#" className="list-group-item list-group-item-action border-0 filterDiv2 harddisk1">harddisk1/2</Link>
-                        </div>
-                    </div>
-                    {/* <!-- End Third Column --> */}
+                    </form>
                 </div>
+                <div className="row mt-5">
+                    <table className="table">
+                        <thead>
+                            <tr style={{fontSize: "1.3rem"}}>
+                                <th>หมวดหมู่สินค้า</th>
+                                <th>รายละเอียด</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {this.state.category.map((category) => (
+                                <>
+                                    <tr key={category.id} id={category.id}>
+                                        <td>{category.name}</td>
+                                        <td>{category.description}</td>
+                                        <td>
+                                            <Link to={`/edit-category/${category.id}`} className="btn btn-warning ">แก้ไข</Link>
+                                        </td>
+                                    </tr>
+                                </>
+                            ))}
+                        </tbody>
+                        <div className="mb-4"></div>
+                    </table>
+                </div>
+
             </div>
         );
     }

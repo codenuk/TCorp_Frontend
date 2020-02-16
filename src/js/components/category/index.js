@@ -3,7 +3,6 @@ import React from 'react';
 import NavSidebar from '../navbar/navSidebar'
 import NavTopbar from '../navbar/navTopbar'
 import ListCategoty from './category'
-import PopUp from './pop-up'
 
 class Category extends React.Component {
     
@@ -22,7 +21,6 @@ class Category extends React.Component {
                     <div className="container-fluid">
                     
                         <div><ListCategoty /></div>
-                        <div><PopUp /></div>
 
                     </div>
                     {/*  /#Content  */}

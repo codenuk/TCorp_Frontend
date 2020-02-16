@@ -1,14 +1,16 @@
 import React from 'react';
-
+import { BrowserRouter } from 'react-router-dom'
 import FrontEnd from './js/route';
 
 function App() {
   return (
-    
+
     <div>
-      <FrontEnd/>
+      <BrowserRouter>
+        <FrontEnd />
+      </BrowserRouter>
     </div>
-    
+
   );
 }
 

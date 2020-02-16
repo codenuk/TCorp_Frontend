@@ -17,7 +17,7 @@ class ProjectTask extends React.Component {
         this.setState({tcorp_id: this.props.match.params.tcorp_id});
     }
     componentWillReceiveProps(nextProps) {
-        console.log(nextProps);
+        console.log(`I am receiving next props`, nextProps);
         this.setState({tcorp_id: this.props.match.params.tcorp_id});
     }
     
@@ -38,7 +38,7 @@ class ProjectTask extends React.Component {
                         <div><ComponentProjectTopic tcorp_id={this.props.match.params.tcorp_id} id={this.props.location.id}/></div>
                         <div className="row">
                             <div className="col-12">
-                                <div><TableTasksStatus tcorp_id={this.props.match.params.tcorp_id} id={this.props.location.id}/></div>
+                                <div><TableTasksStatus timestamp={this.props.timestamp} tcorp_id={this.props.match.params.tcorp_id} id={this.props.location.id}/></div>
                             </div>
                         </div>
                     </div>

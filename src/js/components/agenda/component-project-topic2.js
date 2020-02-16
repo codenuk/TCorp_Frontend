@@ -5,42 +5,50 @@ import axios from 'axios';
 import '../../../css/_progressbar.css'
 import '../../../css/tasks.css'
 
+import { API_URL_DATABASE } from '../../config_database.js';
+
 class ComponentProjectTopic extends React.Component {
 
     state = {
         headDetail: [],
         headBoqId: [],
         checkDelete: false,
+
+
     }
 
-    async getData() {
-        console.log(`Sending with headers ${localStorage.getItem('token_auth')}`);
-        var token_auth = localStorage.getItem('token_auth');
-        var headDetail = await axios.get(`http://vanilla-erp.com:10000/api/v1/projects/${this.props.tcorp_id}`, { headers: { 'x-access-token': token_auth } })
-        // var headBoqId = await axios.get(`http://vanilla-erp.com:10000/api/v1/boqs/${this.props.tcorp_id}`, { headers: { 'x-access-token': token_auth } })
-        console.log("this.props.tcorp_id", this.props.tcorp_id)
-        // http://vanilla-erp.com:10000/api/v1/boqs/T1234
-        var headBoqId = 0
-        await axios.get(`http://vanilla-erp.com:10000/api/v1/boqs/${this.props.tcorp_id}`, { headers: { 'x-access-token': token_auth } })
+    getData(tcorp_id) {
+        return new Promise((resolve, reject) => {
+            var token_auth = localStorage.getItem('token_auth');
+            console.log("I am getting data. this.props.tcorp_id", tcorp_id)
+            
+            axios.get(`http://vanilla-erp.com:${API_URL_DATABASE}/api/v1/projects/${tcorp_id}`, { headers: { 'x-access-token': token_auth } })
             .then(res => {
-                console.log(">>>>> headBoqId #1", res);
-                headBoqId = res.data[0].id;
+                var headDetail = res.data; 
+                axios.get(`http://vanilla-erp.com:${API_URL_DATABASE}/api/v1/boqs/${tcorp_id}`, { headers: { 'x-access-token': token_auth } })
+                .then(res => {
+                    // console.log(">>>>> headBoqId #1", res);
+                    var headBoqId = res.data[0].id;
+                    resolve({ headDetail: headDetail, headBoqId: headBoqId}); 
+
+                })
+		.catch(reject);
             })
-        headDetail = headDetail.data;
-        
-        console.log(">>>>> headBoqId #2", headBoqId, this.props.tcorp_id);
-        // console.log("THIS IS FROM GET DATA head Detail", headDetail);
-        return await { headDetail: headDetail, headBoqId: headBoqId};
+	    .catch(reject);
+            // var headBoqId = await axios.get(`http://vanilla-erp.com:${API_URL_DATABASE}/api/v1/boqs/${this.props.tcorp_id}`, { headers: { 'x-access-token': token_auth } })
+            // http://vanilla-erp.com:${API_URL_DATABASE}/api/v1/boqs/T1234
+                       // console.log(">>>>> headBoqId #2", headBoqId, this.props.tcorp_id);
+        });
     }
 
     componentDidMount() {
         var current = this;
-        this.getData().then(function (data) {
+        this.getData(this.props.tcorp_id).then(function (data) {
             var headDetail = data.headDetail;
             var headBoqId = data.headBoqId;
-            console.log("COMPONENTDIDMOUNT head Detail", headDetail);
+            // console.log("COMPONENTDIDMOUNT head Detail", headDetail);
             current.setState({ headDetail: headDetail, isTokenValid: true , headBoqId: headBoqId});
-            console.log("COMPONENTDIDMOUNT state", current.state);
+            // console.log("COMPONENTDIDMOUNT state", current.state);
         }).catch(function (err) {
             console.log(err);
             current.setState({ isTokenValid: false });
@@ -49,9 +57,10 @@ class ComponentProjectTopic extends React.Component {
 
     componentWillReceiveProps(nextProps) {
         var current = this;
-        this.getData().then(function (data) {
+        // console.log("Compoent project topic is receving next props!!", nextProps);
+        this.getData(nextProps.tcorp_id).then(function (data) {
             var headDetail = data.headDetail;
-            console.log("COMPONENTDIDMOUNT head Detail", headDetail);
+            // console.log("Componentprojectopic2 COMPONENTDIDMOUNT head Detail", headDetail);
             current.setState({ headDetail: headDetail, isTokenValid: true });
         }).catch(function (err) {
             console.log(err);
@@ -59,20 +68,15 @@ class ComponentProjectTopic extends React.Component {
         });
 
     }
-    handleSubmit = () => {
-        console.log("onClick")
-        console.log("check prop tcorp", this.props.tcorp_id)
-        var token_auth = localStorage.getItem('token_auth');
-        console.log("check token ",token_auth)
-        axios.delete(`http://vanilla-erp.com:10000/api/v1/projects/${this.props.tcorp_id}`, { headers: { 'x-access-token': token_auth } })
-            .then(res => {
-                console.log(res);
-                console.log(res.data);
-                this.setState({ checkDelete: true });
-            })
+
+    handleCheck() {
+        if (window.confirm('คุณต้องการเปลี่ยนสถานนี้หรือไม่ ?')) {
+            alert("SSS")
+        }
     }
 
     render() {
+        // console.log("Component Project TOpic Rendering", this.props.tcorp_id);
         if (this.state.checkDelete === true) {
             return <Redirect to="/project-overview" />
         }
@@ -93,6 +97,32 @@ class ComponentProjectTopic extends React.Component {
             return data.slice(0, 10);
         }
 
+        function checkNanDataPrice(data) {
+            if (data === "") {
+                var na = "N/A";
+                return na;
+            }
+            var x = data.toString().indexOf('.');
+            var y = data.toString().length;
+            // console.log("dot price", x)
+            // console.log("dot 2", y)
+            if(x === -1){
+                return data + ".00";
+            }
+            if(y-x === 2){
+                return data + "0";
+            }
+            return data;
+        }
+
+        function diffTime(date) {
+            var dateNow = new Date();
+            var dateEnd = new Date(date);
+            var diff = (dateEnd - dateNow) / (1000 * 3600 * 24);
+            var x = Math.floor(diff);
+            return x;
+        }
+
         return (
             <div className="row">
                 {this.state.headDetail.map(function (headDetail) {
@@ -102,12 +132,13 @@ class ComponentProjectTopic extends React.Component {
                             <h2 className="Projects">{headDetail.tcorp_id}: {checkNanData(headDetail.name_th)} </h2>
                             <h4>โครงการ: {checkNanData(headDetail.description)} </h4>
                             <h4>ลูกค้า: {headDetail.name} </h4>
+                            <h4>ประเภทงาน: {headDetail.type} </h4>
                             <div className="row">
                                 <div className="col-4">
-                                    <h4>มูลค่างาน: {headDetail.value.toLocaleString()} บาท</h4>
+                                    <h4>มูลค่างาน: {checkNanDataPrice(headDetail.value.toLocaleString())} บาท</h4>
                                 </div>
                                 <div className="col-4">
-                                    <h4>ส่งมอบงานภายใน: {checkNullDate(headDetail.end_contract_date)} </h4>
+                                    <h4>ส่งมอบงานภายใน: {checkNullDate(headDetail.end_contract_date)} (เหลืออีก {diffTime(headDetail.end_contract_date)} วัน) </h4>
                                 </div>
                                 <div className="col-4">
                                     <h4>สถานะ: ตามแผน</h4>
@@ -119,24 +150,11 @@ class ComponentProjectTopic extends React.Component {
 
                 <Link to={`/project-task/${this.props.tcorp_id}`}><button type="submit" className="btn btn-dark mr-1">โปรเจค</button></Link>
                 <Link to={`/boq/${this.props.tcorp_id}/${this.state.headBoqId}`}><button type="submit" className="btn btn-dark mr-1">BOQ</button></Link>
-                <Link to={`/document/${this.props.tcorp_id}`}><button type="submit" className="btn btn-dark mr-1">เอกสาร</button></Link>
+                {/* <Link to={`/document/${this.props.tcorp_id}`}><button type="submit" className="btn btn-dark mr-1">เอกสาร</button></Link> */}
 
                 <div className="ml-auto mr-1">
                     <Link to={`/edit-project/${this.props.tcorp_id}`}><button type="submit" className="btn btn-dark mr-1">แก้ไข</button></Link>
-                    <Link onClick={this.handleSubmit}><button type="submit" className="btn btn-dark mr-1">ลบ</button></Link>
                 </div>
-
-                <div className="col-12 my-3 px-5 mx-5">
-                    <ul className="progressbar" style={{ fontSize: "1.4rem" }}>
-                        <li className="active ">เปิด BOQ</li>
-                        <li>Check Stock</li>
-                        <li>เปิด PO</li>
-                        <li>จัดเก็บลง Stock</li>
-                        <li>พร้อมส่งสินค้า</li>
-                        <li>ส่งสินค้า</li>
-                    </ul>
-                </div>
-
             </div>
         );
     }

@@ -4042,7 +4042,7 @@ fieldset:disabled a.btn {
   width: 282.3px;
   height: 197.6px;
   position: relative;
-  margin: 10px;
+  margin: 10px 7px 10px 0;
   display: flex;
   flex-direction: column;
   min-width: 0;

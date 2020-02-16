@@ -2,8 +2,16 @@
     border-bottom: 3px solid rgb(240, 240, 240);
 }
 
+.line_under_Boq {
+    border-bottom: 3px solid #6c757d;
+}
+
 .text-underline{
     text-decoration: underline;
+}
+
+.none_line:hover{
+    text-decoration: none;
 }
 
 .Projects {
@@ -89,7 +97,7 @@
     margin-left: 15px;
     margin-bottom: 0;
     font-family: ThaiSansLite;
-    font-size: 22.8px;
+    font-size: 1.2rem;
     color: #0c234a;
 }
 
@@ -344,13 +352,11 @@ p.DetailCreateProject{
 }
 
 .IconClosePage{
+    margin: 3rem 3rem 0 0;
     width: 20px;
     height: 20px;
-    object-fit: contain;
     color: black;
     float: right;
-    margin-top: 30px;
-    margin-right: 35px;
 }
 
 body.LoginLayout {

@@ -4,6 +4,7 @@ import NavSidebar from '../../navbar/navSidebar'
 import NavTopbar from '../../navbar/navTopbar'
 import ComponentProjectTopic from '../component-project-topic2'
 import ListBoq from './list-boq'
+// import ListBoq2 from './list-boq2'
 
 class Boq extends React.Component {
     render() {
@@ -22,10 +23,15 @@ class Boq extends React.Component {
                     <div className="container-fluid">
                         <div><ComponentProjectTopic tcorp_id={this.props.match.params.tcorp_id} boq_id={this.props.match.params.boq_id}/></div>
                         <div className="row">
-                            <div className="col-12">
+                            <div className="col-12 mt-2">
                                 <div><ListBoq tcorp_id={this.props.match.params.tcorp_id} boq_id={this.props.match.params.boq_id}/></div>
                             </div>
                         </div>
+                        {/* <div className="row">
+                            <div className="col-12 mt-2">
+                                <div><ListBoq2 tcorp_id={this.props.match.params.tcorp_id} boq_id={this.props.match.params.boq_id}/></div>
+                            </div>
+                        </div> */}
                     </div>
                     {/* /#Content  */}
                 </div>

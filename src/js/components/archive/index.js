@@ -2,13 +2,11 @@ import React from 'react';
 
 import NavSidebar from '../navbar/navSidebar'
 import NavTopbar from '../navbar/navTopbar'
-import ComponentProjectCards from './project_card';
-import ComponentProjectOverview from './project_overview';
+import ComponentArchiveCards from './archive_card';
+import ComponentArchiveHead from './archive_head';
 
-class ProjectOverview extends React.Component {
+class ArchiveOverview extends React.Component {
     render() {
-	console.log('hello!!');
-        console.log(`This is tcorp_id: ${JSON.stringify(this.props)}`);
         return (
             <div className="d-flex" id="wrapper">
                 
@@ -21,9 +19,9 @@ class ProjectOverview extends React.Component {
 
                     {/*  Content  */}
                     <div className="container-fluid">
-                        <div><ComponentProjectOverview /></div>
+                        <div><ComponentArchiveHead /></div>
                         {/* <div className="">  */}
-                            <ComponentProjectCards />
+                            <ComponentArchiveCards />
                         {/* </div> */}
 
                     </div>
@@ -36,4 +34,4 @@ class ProjectOverview extends React.Component {
      }
 }
 
-export default ProjectOverview;
+export default ArchiveOverview;

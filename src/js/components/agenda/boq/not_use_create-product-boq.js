@@ -8,7 +8,7 @@ class CreateProductBoq extends React.Component {
         products_id: '', 
         qty: '',
         status_orders_id: 1, //Must have
-        bill_of_quantity_id: this.props.location.state.bill_of_quantity_id, //Must have
+        bill_of_quantity_id: this.props.match.params.boq_id, //Must have
         isFinish: false
     }
 
@@ -48,13 +48,14 @@ class CreateProductBoq extends React.Component {
         console.log(`This is tcorp_id: ${this.props.location.state.tcorp_id}`);
 
         var tcorp_id = this.props.location.state.tcorp_id;
+        var boq_id = this.props.match.params.boq_id;
         if (this.state.isFinish === true ){
-            return <Redirect to={`/boq/${tcorp_id}/1`}/> 
+            return <Redirect to={`/boq/${tcorp_id}/${boq_id}`}/> 
         }
         return (
             <div>
                 <>
-                    <Link to={`/boq/${tcorp_id}/1`}><i className="IconClosePage fas fa-times"></i></Link>
+                    <Link to={`/boq/${tcorp_id}/${boq_id}`}><i className="IconClosePage fas fa-times"></i></Link>
                     <div className="container" style={{ paddingTop: "50px", paddingRight: "15%" }} >
                         <h1>เพิ่มสินค้า:</h1>
 

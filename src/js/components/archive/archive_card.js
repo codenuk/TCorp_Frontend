@@ -9,7 +9,7 @@ import '../../../css/mystyles.css';
 
 import { API_URL_DATABASE } from '../../config_database.js';
 
-class ComponentProjectCards extends React.Component {
+class ComponentArchiveCards extends React.Component {
 
     state = {
         projects: [],
@@ -17,7 +17,6 @@ class ComponentProjectCards extends React.Component {
     }
 
     componentDidMount() {
-        console.log(`port >>>>>>>>>>> ${API_URL_DATABASE}`)
         console.log(`Sending with headers ${localStorage.getItem('token_auth')}`);
         var token_auth = localStorage.getItem('token_auth');
         //token_auth = "asdasdasdasd";
@@ -30,9 +29,9 @@ class ComponentProjectCards extends React.Component {
                     console.log("project.is_aborted", project.is_aborted)
                     var percentProject = current.persent(project.no_total_tasks, project.no_total_finished);
                     console.log("percentProject", percentProject)
-                    if (project.is_aborted === 0 && percentProject !== 100)(
+                    if (project.is_aborted === 1 || percentProject === 100){
                         projects_ongoing.push(project)
-                    )
+                    } 
                     return null;
                 }) 
                 console.log("projects_ongoing", projects_ongoing)
@@ -216,11 +215,12 @@ class ComponentProjectCards extends React.Component {
         )
     }
 
+
     render() {
         if (!this.state.isTokenValid) {
             return <Redirect to='/' />
         }
-        // console.log("port",this.props.port)
+
         return (
             <div>
                 <div className="row">
@@ -235,4 +235,4 @@ class ComponentProjectCards extends React.Component {
 }
 
 
-export default ComponentProjectCards;
+export default ComponentArchiveCards;

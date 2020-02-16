@@ -116,7 +116,7 @@ class EditBoq extends React.Component {
 
         axios.get(`http://vanilla-erp.com:10000/api/v1/boqs/status_order`, { headers: { 'x-access-token': token_auth } })
             .then(res => {
-                console.log(res)
+                console.log("status order",res)
                 const statusOrder = res.data;
                 // console.log(persons.length)
                 current.setState({ statusOrder: statusOrder });
@@ -141,8 +141,9 @@ class EditBoq extends React.Component {
     render() {
         var current = this;
         var tcorp_id = this.props.match.params.tcorp_id;
+        var boq_id = this.props.match.params.boq_id;
         if (this.state.isTokenValid === true || this.state.checkDelete === true) {
-            return <Redirect to={`/boq/line_item/${tcorp_id}`} />
+            return <Redirect to={`/boq/${tcorp_id}/${boq_id}`} />
         }
         console.log(">>>>>>>>>>current.state.role_id ",current.state.role_id )
         return (
@@ -152,7 +153,7 @@ class EditBoq extends React.Component {
                     if (current.state.role_id === 1) {
                         return (
                             <>
-                                <Link to={`/boq/${this.props.tcorp_id}/${this.props.boq_id}`}><i className="IconClosePage fas fa-times"></i></Link>
+                                <Link to={`/boq/${tcorp_id}/${boq_id}`}><i className="IconClosePage fas fa-times"></i></Link>
                                 <div className="container" style={{ paddingTop: "50px", paddingRight: "15%" }} >
                                     <h1>แก้ไขสินค้า: {headDetail.name}</h1>
                                     <div className="row">
@@ -164,7 +165,7 @@ class EditBoq extends React.Component {
                                         <h1>ทีม PM</h1>
                                         <div className="form-group">
                                             <h4>รหัสสินค้า:</h4>
-                                            <input type="text" className="form-control" onChange={current.handleChangeProductId} placeholder={headDetail.products_id} />
+                                            <input type="text" className="form-control" onChange={current.handleChangeProductId} defaultValue={headDetail.products_id} />
                                         </div>
                                         <div className="form-group">
                                             <h4>รายละเอียดสินค้า : </h4>
@@ -172,7 +173,7 @@ class EditBoq extends React.Component {
                                         </div>
                                         <div className="form-group">
                                             <h4>จำนวนของ :</h4>
-                                            <input type="number" className="form-control" onChange={current.handleChangeQty} placeholder={headDetail.qty} />
+                                            <input type="number" className="form-control" onChange={current.handleChangeQty} defaultValue={headDetail.qty} />
                                         </div>
                                         <div className="row">
                                             <button type="submit" class="btn btn-secondary ml-auto mr-0">ยืนยัน</button>
@@ -185,11 +186,11 @@ class EditBoq extends React.Component {
                                         <h1>ทีม Stock</h1>
                                         <div className="form-group">
                                             <h4>รหัสสินค้า:</h4>
-                                            <input type="text" className="form-control" onChange={current.handleChangeProductId} placeholder={headDetail.products_id} />
+                                            <input type="text" className="form-control" onChange={current.handleChangeProductId} defaultValue={headDetail.products_id} />
                                         </div>
                                         <div className="form-group">
                                             <h4>จองของแล้ว :</h4>
-                                            <input type="number" className="form-control" onChange={current.handleChangeStockQty} placeholder={headDetail.stock_qty} />
+                                            <input type="number" className="form-control" onChange={current.handleChangeStockQty} defaultValue={headDetail.stock_qty} />
                                         </div>
                                         <div className="form-group">
                                             <h4>จัดเก็บลง Stock :</h4>
@@ -212,11 +213,11 @@ class EditBoq extends React.Component {
                                         <h1>ทีม PO</h1>
                                         <div className="form-group">
                                             <h4>รหัสสินค้า:</h4>
-                                            <input type="text" className="form-control" onChange={current.handleChangeProductId} placeholder={headDetail.products_id} />
+                                            <input type="text" className="form-control" onChange={current.handleChangeProductId} defaultValue={headDetail.products_id} />
                                         </div>
                                         <div className="form-group">
                                             <h4>เลขที่ PO :</h4>
-                                            <input type="text" className="form-control" onChange={current.handleChangePo} placeholder={headDetail.po_number} />
+                                            <input type="text" className="form-control" onChange={current.handleChangePo} defaultValue={headDetail.po_number} />
                                         </div>
                                         <div className="form-group">
                                             <h4>วันที่รับของ :</h4>
@@ -237,7 +238,7 @@ class EditBoq extends React.Component {
                     if (current.state.role_id === 3) {
                         return (
                             <>
-                                <Link to={`/boq/line_item/${tcorp_id}`}><i className="IconClosePage fas fa-times"></i></Link>
+                                <Link to={`/boq/${tcorp_id}/${boq_id}`}><i className="IconClosePage fas fa-times"></i></Link>
                                 <div className="container" style={{ paddingTop: "50px", paddingRight: "15%" }} >
                                     <h1>แก้ไขสินค้า: {headDetail.name}</h1>
                                     <div className="row">
@@ -249,7 +250,7 @@ class EditBoq extends React.Component {
                                         <h1>ทีม PM</h1>
                                         <div className="form-group">
                                             <h4>รหัสสินค้า:</h4>
-                                            <input type="text" className="form-control" onChange={current.handleChangeProductId} placeholder={headDetail.products_id} />
+                                            <input type="text" className="form-control" onChange={current.handleChangeProductId} defaultValue={headDetail.products_id} />
                                         </div>
                                         <div className="form-group">
                                             <h4>รายละเอียดสินค้า : </h4>
@@ -257,7 +258,7 @@ class EditBoq extends React.Component {
                                         </div>
                                         <div className="form-group">
                                             <h4>จำนวนของ :</h4>
-                                            <input type="number" className="form-control" onChange={current.handleChangeQty} placeholder={headDetail.qty} />
+                                            <input type="number" className="form-control" onChange={current.handleChangeQty} defaultValue={headDetail.qty} />
                                         </div>
                                         <div className="row">
                                             <button type="submit" class="btn btn-secondary ml-auto mr-0">ยืนยัน</button>
@@ -313,7 +314,7 @@ class EditBoq extends React.Component {
                     if (current.state.role_id === 5){
                         return (
                             <>
-                                <Link to={`/boq/line_item/${tcorp_id}`}><i className="IconClosePage fas fa-times"></i></Link>
+                                <Link to={`/boq/${tcorp_id}/${boq_id}`}><i className="IconClosePage fas fa-times"></i></Link>
                                 <div className="container" style={{ paddingTop: "50px", paddingRight: "15%" }} >
                                     <h1>แก้ไขสินค้า: {headDetail.name}</h1>
 
@@ -340,11 +341,11 @@ class EditBoq extends React.Component {
                                         <h1>ทีม Stock</h1>
                                         <div className="form-group">
                                             <h4>รหัสสินค้า:</h4>
-                                            <input type="text" className="form-control" onChange={current.handleChangeProductId} placeholder={headDetail.products_id} />
+                                            <input type="text" className="form-control" onChange={current.handleChangeProductId} defaultValue={headDetail.products_id} />
                                         </div>
                                         <div className="form-group">
                                             <h4>จองของแล้ว :</h4>
-                                            <input type="number" className="form-control" onChange={current.handleChangeStockQty} placeholder={headDetail.stock_qty} />
+                                            <input type="number" className="form-control" onChange={current.handleChangeStockQty} defaultValue={headDetail.stock_qty} />
                                         </div>
                                         <div className="form-group">
                                             <h4>จัดเก็บลง Stock :</h4>
@@ -389,7 +390,7 @@ class EditBoq extends React.Component {
                     if (current.state.role_id === 7){
                         return (
                             <>
-                                <Link to={`/boq/line_item/${tcorp_id}`}><i className="IconClosePage fas fa-times"></i></Link>
+                                <Link to={`/boq/${tcorp_id}/${boq_id}`}><i className="IconClosePage fas fa-times"></i></Link>
                                 <div className="container" style={{ paddingTop: "50px", paddingRight: "15%" }} >
                                     <h1>แก้ไขสินค้า: {headDetail.name}</h1>
 
@@ -437,11 +438,11 @@ class EditBoq extends React.Component {
                                         <h1>ทีม PO</h1>
                                         <div className="form-group">
                                             <h4>รหัสสินค้า:</h4>
-                                            <input type="text" className="form-control" onChange={current.handleChangeProductId} placeholder={headDetail.products_id} />
+                                            <input type="text" className="form-control" onChange={current.handleChangeProductId} defaultValue={headDetail.products_id} />
                                         </div>
                                         <div className="form-group">
                                             <h4>เลขที่ PO :</h4>
-                                            <input type="text" className="form-control" onChange={current.handleChangePo} placeholder={headDetail.po_number} />
+                                            <input type="text" className="form-control" onChange={current.handleChangePo} defaultValue={headDetail.po_number} />
                                         </div>
                                         <div className="form-group">
                                             <h4>วันที่รับของ :</h4>
@@ -461,7 +462,7 @@ class EditBoq extends React.Component {
                     // ANOTHER ROLE 
                     return (
                         <>
-                            <Link to={`/boq/line_item/${tcorp_id}`}><i className="IconClosePage fas fa-times"></i></Link>
+                            <Link to={`/boq/${tcorp_id}/${boq_id}`}><i className="IconClosePage fas fa-times"></i></Link>
                             <div className="container" style={{ paddingTop: "50px", paddingRight: "15%" }} >
                                 <h1>แก้ไขสินค้า: {headDetail.name}</h1>
 

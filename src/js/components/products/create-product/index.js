@@ -1,30 +1,27 @@
 import React from 'react';
 
-import NavSidebar from '../navbar/navSidebar'
-import NavTopbar from '../navbar/navTopbar'
-import ComponentProjectCards from './project_card';
-import ComponentProjectOverview from './project_overview';
+import NavSidebar from '../../navbar/navSidebar'
+import NavTopbar from '../../navbar/navTopbar'
+import ComponentAddProduct from './create-products';
 
-class ProjectOverview extends React.Component {
+class CreateProduct extends React.Component {
     render() {
-	console.log('hello!!');
-        console.log(`This is tcorp_id: ${JSON.stringify(this.props)}`);
         return (
             <div className="d-flex" id="wrapper">
                 
                 <div><NavSidebar /></div>
                 {/* Sidebar  */}
-
+                
                 {/*  Page Content  */}
                 <div id="page-content-wrapper">
                     <div><NavTopbar /></div>
 
                     {/*  Content  */}
                     <div className="container-fluid">
-                        <div><ComponentProjectOverview /></div>
-                        {/* <div className="">  */}
-                            <ComponentProjectCards />
-                        {/* </div> */}
+
+                        <div className=""> 
+                            <div><ComponentAddProduct /></div>
+                        </div>
 
                     </div>
                     {/*  /#Content  */}
@@ -36,4 +33,4 @@ class ProjectOverview extends React.Component {
      }
 }
 
-export default ProjectOverview;
+export default CreateProduct;

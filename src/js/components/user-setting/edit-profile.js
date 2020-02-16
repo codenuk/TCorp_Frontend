@@ -3,6 +3,8 @@ import axios from 'axios';
 import jwt_decode from 'jwt-decode';
 import { Link, Redirect } from 'react-router-dom'
 
+import { API_URL_DATABASE } from '../../config_database.js';
+
 class EditProfile extends React.Component {
 
     state = {
@@ -16,7 +18,9 @@ class EditProfile extends React.Component {
     }
 
     handleChangePhone = event => {
-        this.setState({ phone: event.target.value });
+        if(event.target.value.length <= 10){
+            this.setState({ phone: event.target.value });
+        }
     }
 
     handleChangeGender = event => {
@@ -24,11 +28,15 @@ class EditProfile extends React.Component {
     }
 
     handleChangeBirthdate = event => {
-        this.setState({ birthdate: event.target.value });        
+        if(event.target.value.length <= 10){
+            this.setState({ birthdate: event.target.value });
+        }        
     }
 
     handleChangeAddress = event => {
-        this.setState({ address: event.target.value });
+        if(event.target.value.length <= 255){
+            this.setState({ address: event.target.value });
+        }
     }
 
     handleSubmit = event => {
@@ -38,7 +46,7 @@ class EditProfile extends React.Component {
         const edited = {
             "phone": this.state.phone,
             "gender": this.state.gender,
-            "birthdate": this.state.birthdate,
+            "birthdate": this.state.birthdate.substring(0, 10),
             "address": this.state.address
         };
         console.log("edited", edited)
@@ -47,7 +55,7 @@ class EditProfile extends React.Component {
         var token_auth = localStorage.getItem('token_auth');
         var decoded = jwt_decode(token_auth);
         var username = decoded.username;
-        axios.put(`http://vanilla-erp.com:10000/api/v1/users/${username}`, edited, { headers: { "x-access-token": localStorage.getItem('token_auth') } })
+        axios.put(`http://vanilla-erp.com:${API_URL_DATABASE}/api/v1/users/${username}`, edited, { headers: { "x-access-token": localStorage.getItem('token_auth') } })
             .then(res => {
                 console.log(res);
                 this.setState({ isFinish: true });
@@ -71,7 +79,7 @@ class EditProfile extends React.Component {
         var decoded = jwt_decode(token_auth);
         var username = decoded.username;
         // var current = this;
-        axios.get(`http://vanilla-erp.com:10000/api/v1/users/${username}`, { headers: { 'x-access-token': token_auth } })
+        axios.get(`http://vanilla-erp.com:${API_URL_DATABASE}/api/v1/users/${username}`, { headers: { 'x-access-token': token_auth } })
             .then(res => {
                 console.log(res)
                 const user_infos = res.data;
@@ -121,7 +129,7 @@ class EditProfile extends React.Component {
 
                                 <div className="form-group">
                                     <h4>เบอร์ติดต่อ</h4>
-                                    <input type="number" className="form-control" onChange={this.handleChangePhone} placeholder={this.checkNaNData(user_info.phone)} />
+                                    <input type="number" className="form-control" onChange={this.handleChangePhone} defaultValue={this.checkNaNData(user_info.phone)} />
                                 </div>
                                 <div className="form-group">
                                     <h4>เพศ</h4>
@@ -146,10 +154,10 @@ class EditProfile extends React.Component {
                                 </div>
                                 <div className="form-group">
                                     <h4>ที่อยู่</h4>
-                                    <input type="text" className="form-control" onChange={this.handleChangeAddress} placeholder={this.checkNaNData(user_info.address)} />
+                                    <input type="text" className="form-control" onChange={this.handleChangeAddress} defaultValue={user_info.address} />
                                 </div>
 
-                                <button type="submit" className="btn btn-primary" style={{ width: "100%", fontSize: "1.3em", color: "white" }}>แก้ไขโปรเจค</button>
+                                <button type="submit" className="btn btn-primary" style={{ width: "100%", fontSize: "1.3em", color: "white" }}>ยืนยันข้อมูลส่วนตัว</button>
                             </>
                         ))}
                     </form>
