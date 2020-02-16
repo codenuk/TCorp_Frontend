@@ -19,6 +19,7 @@ class EditProject extends React.Component {
         name_th: "",
         description: "",
         value: "",
+        // sign_contract: "",
         contract_id: "",
         end_contract_date: "",
         billing_configuration_id: "",
@@ -47,6 +48,12 @@ class EditProject extends React.Component {
             this.setState({ value: 0 });
         }
     }
+
+    // handleChangeSignContract = event => {
+    //     if(event.target.value.length <= 10){
+    //         this.setState({ sign_contract: event.target.value });
+    //     }
+    // }
 
     handleChangeContractIdName = event => {
         if (event.target.value.length <= 44) {
@@ -107,6 +114,7 @@ class EditProject extends React.Component {
             "name_th": this.state.name_th,
             "description": this.state.description,
             "value": value_not_comma,
+            // "sign_contract": this.state.sign_contract,
             "contract_id": this.state.contract_id,
             "end_contract_date": this.state.end_contract_date,
             "billing_configuration_id": this.state.billing_configuration_id,
@@ -144,6 +152,7 @@ class EditProject extends React.Component {
                     name_th: projectIdOlds[0].name_th,
                     description: projectIdOlds[0].description,
                     value: projectIdOlds[0].value,
+                    // sign_contract: projectIdOlds[0].sign_contract,
                     contract_id: projectIdOlds[0].contract_id,
                     end_contract_date: projectIdOlds[0].end_contract_date.substring(0, 10),
                     billing_configuration_id: projectIdOlds[0].billing_configuration_id,
@@ -266,6 +275,10 @@ class EditProject extends React.Component {
                                     <h4>มูลค่างาน</h4>
                                     <NumberFormat className="form-control" onChange={this.handleChangeValue} thousandSeparator={true} defaultValue={projectIdOld.value} />
                                 </div>
+                                {/* <div className="form-group">
+                                    <h4>วันที่เซ็นสัญญา</h4>
+                                    <input type="date" className="form-control" onChange={this.handleChangeSignContract} />
+                                </div> */}
                                 <div className="form-group">
                                     <h4>สัญญาเลขที่</h4>
                                     <input type="text" className="form-control" id="exampleInputPassword1" onChange={this.handleChangeContractIdName} defaultValue={this.checkNanData(projectIdOld.contract_id)} />
@@ -313,3 +326,4 @@ class EditProject extends React.Component {
 }
 
 export default EditProject;
+
